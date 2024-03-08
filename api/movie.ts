@@ -15,10 +15,10 @@ router.get("/", (req, res) => {
         }
     });
   });
-router.get("/:title", (req, res) => {
-    const titleToSearch = req.params.title;
+router.get("/", (req, res) => {
+    const title = req.query.title;
     let sql = "SELECT * FROM `Movie` WHERE `title` LIKE ?";
-    sql = mysql.format(sql, [`%${titleToSearch}%`]);
+    sql = mysql.format(sql, [`%${title}%`]);
     conn.query(sql, (err, result) => {
         if (err) {
             console.error("Error searching for movie:", err);
