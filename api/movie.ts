@@ -17,8 +17,8 @@ router.get("/", (req, res) => {
   });
 router.get("/:title", (req, res) => {
     const titleToSearch = req.params.title;
-    let sql = "SELECT * FROM `Movie` WHERE `title` = ?";
-    sql = mysql.format(sql, [titleToSearch]);
+    let sql = "SELECT * FROM `Movie` WHERE `title` LIKE ?";
+    sql = mysql.format(sql, [`%${titleToSearch}%`]);
     conn.query(sql, (err, result) => {
         if (err) {
             console.error("Error searching for movie:", err);
@@ -27,6 +27,7 @@ router.get("/:title", (req, res) => {
         res.status(200).json(result);
     });
 });
+
 
 router.post("/", (req, res) => {
     let get_movie : GetMovie = req.body;
