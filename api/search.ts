@@ -19,10 +19,14 @@ router.get("/", (req, res) => {
           creator.birthday AS creator_birthday
       FROM 
           Movie
-          LEFT JOIN stars ON Movie.mID = stars.movieIDs
-          LEFT JOIN Person AS actor ON stars.personIDs = actor.pID
-          LEFT JOIN creators ON Movie.mID = creators.movieIDc
-          LEFT JOIN Person AS creator ON creators.personIDc = creator.pID
+          LEFT JOIN stars 
+            ON Movie.mID = stars.movieIDs
+          LEFT JOIN Person AS actor 
+            ON stars.personIDs = actor.pID
+          LEFT JOIN creators 
+            ON Movie.mID = creators.movieIDc
+          LEFT JOIN Person AS creator 
+            ON creators.personIDc = creator.pID
       WHERE 
           Movie.title LIKE ?`;
 
